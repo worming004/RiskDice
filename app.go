@@ -29,7 +29,7 @@ func DefaultCounter() ResultCounter {
 func main() {
 	seedRandom()
 
-	numberOfLaunches := 10000000
+	numberOfLaunches := 100000000
 	launches := getLaunches(numberOfLaunches)
 
 	resultOfWinners := make([]string, numberOfLaunches)
