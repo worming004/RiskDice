@@ -29,7 +29,7 @@ func DefaultCounter() ResultCounter {
 func main() {
 	seedRandom()
 
-	numberOfLaunches := 1000000
+	numberOfLaunches := 10000000
 	launches := getLaunches(numberOfLaunches)
 
 	resultOfWinners := make([]string, numberOfLaunches)
@@ -54,6 +54,16 @@ func main() {
 	}
 
 	fmt.Printf("%+v\n", finalResult)
+	fmt.Printf("number of launch: %v\n", numberOfLaunches)
+	percentAttack := (float64(finalResult.attackCounter) / float64(numberOfLaunches)) * 100
+	fmt.Printf("percent attack win: %v%%\n", percentAttack)
+
+	percentDefense := (float64(finalResult.defenseCounter) / float64(numberOfLaunches)) * 100
+	fmt.Printf("percent defense win: %v%%\n", percentDefense)
+
+	percentEquality := (float64(finalResult.equalityCounter) / float64(numberOfLaunches)) * 100
+	fmt.Printf("percent attack win: %v%%\n", percentEquality)
+
 }
 
 func (l Launch) WhoIsWinning() string {
