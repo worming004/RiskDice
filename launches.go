@@ -18,7 +18,7 @@ func getLaunches(numberOfItem int) []Launch {
 }
 
 func generateLaunch() Launch {
-	token5 := make([]int, 5)
+	token5 := make([]int8, 5)
 	for i := 0; i < 5; i++ {
 		token5[i] = getDiceValue()
 	}
@@ -30,6 +30,6 @@ func generateLaunch() Launch {
 	return *launch
 }
 
-func getDiceValue() int {
-	return rand.Intn(7)
+func getDiceValue() int8 {
+	return int8(rand.Intn(7))
 }

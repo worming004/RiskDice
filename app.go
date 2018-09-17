@@ -8,8 +8,8 @@ import (
 var maxVal = 0
 
 type Launch struct {
-	attack  []int
-	defense []int
+	attack  []int8
+	defense []int8
 }
 
 type ResultCounter struct {
@@ -32,7 +32,8 @@ func main() {
 	numberOfLaunches := 100000000
 	launches := getLaunches(numberOfLaunches)
 
-	resultOfWinners := make([]string, numberOfLaunches)
+	resultOfWinners := make([]int8, numberOfLaunches)
+	// resultOfWinners := make([]uint, numberOfLaunches)
 
 	for i, element := range launches {
 		winner := element.WhoIsWinning()
@@ -42,35 +43,22 @@ func main() {
 	finalResult := DefaultCounter()
 
 	for _, element := range resultOfWinners {
-		if element == "attack" {
+		if element == ATTACK {
 			finalResult.attackCounter++
-		} else if element == "defense" {
+		} else if element == DEFENSE {
 			finalResult.defenseCounter++
-		} else if element == "equality" {
+		} else if element == EQUALITY {
 			finalResult.equalityCounter++
 		} else {
 			panic("wrong test value")
 		}
 	}
-
-	fmt.Printf("%+v\n", finalResult)
-	fmt.Printf("number of launch: %v\n", numberOfLaunches)
-	percentAttack := (float64(finalResult.attackCounter) / float64(numberOfLaunches)) * 100
-	fmt.Printf("percent attack win: %v%%\n", percentAttack)
-
-	percentDefense := (float64(finalResult.defenseCounter) / float64(numberOfLaunches)) * 100
-	fmt.Printf("percent defense win: %v%%\n", percentDefense)
-
-	percentEquality := (float64(finalResult.equalityCounter) / float64(numberOfLaunches)) * 100
-	fmt.Printf("percent attack win: %v%%\n", percentEquality)
-
+	finalResult.printResult(numberOfLaunches)
 }
 
-func (l Launch) WhoIsWinning() string {
-	sort.Sort(sort.Reverse(sort.IntSlice(l.attack)))
-	sort.Sort(sort.Reverse(sort.IntSlice(l.defense)))
-	// sort.Ints(l.attack)
-	// sort.Ints(l.defense)
+func (l Launch) WhoIsWinning() int8 {
+	sort.Sort(byReverseVal(l.attack))
+	sort.Sort(byReverseVal(l.defense))
 
 	attackWin := 0
 	defenseWin := 0
@@ -87,10 +75,24 @@ func (l Launch) WhoIsWinning() string {
 	}
 
 	if attackWin == 2 {
-		return "attack"
+		return ATTACK
 	} else if defenseWin == 2 {
-		return "defense"
+		return DEFENSE
 	} else {
-		return "equality"
+		return EQUALITY
 	}
+}
+
+func (finalResult ResultCounter) printResult(numberOfLaunches int) {
+	fmt.Printf("%+v\n", finalResult)
+	fmt.Printf("number of launch: %v\n", numberOfLaunches)
+	percentAttack := (float64(finalResult.attackCounter) / float64(numberOfLaunches)) * 100
+	fmt.Printf("percent attack win: %v%%\n", percentAttack)
+
+	percentDefense := (float64(finalResult.defenseCounter) / float64(numberOfLaunches)) * 100
+	fmt.Printf("percent defense win: %v%%\n", percentDefense)
+
+	percentEquality := (float64(finalResult.equalityCounter) / float64(numberOfLaunches)) * 100
+	fmt.Printf("percent attack win: %v%%\n", percentEquality)
+
 }
