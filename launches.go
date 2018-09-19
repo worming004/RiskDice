@@ -9,12 +9,10 @@ func seedRandom() {
 	rand.Seed(time.Now().UTC().Unix())
 }
 
-func getLaunches(numberOfItem int) []Launch {
-	result := make([]Launch, numberOfItem)
+func getLaunches(numberOfItem int, launchChan chan Launch) {
 	for i := 0; i < numberOfItem; i++ {
-		result[i] = generateLaunch()
+		launchChan <- generateLaunch()
 	}
-	return result
 }
 
 func generateLaunch() Launch {

@@ -29,31 +29,31 @@ func DefaultCounter() ResultCounter {
 func main() {
 	seedRandom()
 
-	numberOfLaunches := 100000000
-	launches := getLaunches(numberOfLaunches)
-
-	resultOfWinners := make([]int8, numberOfLaunches)
-	// resultOfWinners := make([]uint, numberOfLaunches)
-
-	for i, element := range launches {
-		winner := element.WhoIsWinning()
-		resultOfWinners[i] = winner
-	}
+	numberOfLaunches := 1000000
+	chanLaunch := make(chan Launch)
+	go getLaunches(numberOfLaunches, chanLaunch)
 
 	finalResult := DefaultCounter()
 
-	for _, element := range resultOfWinners {
-		if element == ATTACK {
-			finalResult.attackCounter++
-		} else if element == DEFENSE {
-			finalResult.defenseCounter++
-		} else if element == EQUALITY {
-			finalResult.equalityCounter++
-		} else {
-			panic("wrong test value")
-		}
+	for i := 0; i < numberOfLaunches; i++ {
+		element := <-chanLaunch
+		element.AppendResult(&finalResult)
 	}
+
 	finalResult.printResult(numberOfLaunches)
+}
+
+func (l Launch) AppendResult(result *ResultCounter) {
+	winner := l.WhoIsWinning()
+	if winner == ATTACK {
+		result.attackCounter++
+	} else if winner == DEFENSE {
+		result.defenseCounter++
+	} else if winner == EQUALITY {
+		result.equalityCounter++
+	} else {
+		panic("wrong test value")
+	}
 }
 
 func (l Launch) WhoIsWinning() int8 {
