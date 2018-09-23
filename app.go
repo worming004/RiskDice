@@ -1,18 +1,10 @@
 package main
 
+const DEFAULT_NUMBER_SIMULATION int = 100
+
 func main() {
 	seedRandom()
 
-	numberOfLaunches := 1000000
-	chanLaunch := make(chan Launch)
-	go getLaunches(numberOfLaunches, chanLaunch)
-
-	finalResult := DefaultCounter()
-
-	for i := 0; i < numberOfLaunches; i++ {
-		element := <-chanLaunch
-		element.AppendResult(&finalResult)
-	}
-
-	finalResult.printResult(numberOfLaunches)
+	result := MultipleSimulate(15, 15, DEFAULT_NUMBER_SIMULATION)
+	result.PrintResult()
 }

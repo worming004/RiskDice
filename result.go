@@ -2,59 +2,30 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
-func (l Launch) AppendResult(result *ResultCounter) {
-	winner := l.WhoIsWinning()
-	if winner == ATTACK {
-		result.attackCounter++
-	} else if winner == DEFENSE {
-		result.defenseCounter++
-	} else if winner == EQUALITY {
-		result.equalityCounter++
-	} else {
-		panic("wrong test value")
+func (l *Launch) WhoIsWinning() LaunchResult {
+	if l.result != nil {
+		return *l.result
 	}
+
+	result := new(LaunchResult)
+
+	for i := 0; i < min(len(l.attack), len(l.defense)); i++ {
+		if l.attack[i] > l.defense[i] {
+			result.defenseLost++
+		} else {
+			result.attackLost++
+		}
+	}
+	l.result = result
+	return *result
 }
 
-func (l Launch) WhoIsWinning() int8 {
-	sort.Sort(byReverseVal(l.attack))
-	sort.Sort(byReverseVal(l.defense))
-
-	attackWin := 0
-	defenseWin := 0
-
-	if l.attack[0] > l.defense[0] {
-		attackWin++
-	} else {
-		defenseWin++
-	}
-	if l.attack[1] > l.defense[1] {
-		attackWin++
-	} else {
-		defenseWin++
-	}
-
-	if attackWin == 2 {
-		return ATTACK
-	} else if defenseWin == 2 {
-		return DEFENSE
-	} else {
-		return EQUALITY
-	}
-}
-
-func (finalResult ResultCounter) printResult(numberOfLaunches int) {
-	fmt.Printf("%+v\n", finalResult)
-	fmt.Printf("number of launch: %v\n", numberOfLaunches)
-	percentAttack := (float64(finalResult.attackCounter) / float64(numberOfLaunches)) * 100
-	fmt.Printf("percent attack win: %v%%\n", percentAttack)
-
-	percentDefense := (float64(finalResult.defenseCounter) / float64(numberOfLaunches)) * 100
-	fmt.Printf("percent defense win: %v%%\n", percentDefense)
-
-	percentEquality := (float64(finalResult.equalityCounter) / float64(numberOfLaunches)) * 100
-	fmt.Printf("percent attack win: %v%%\n", percentEquality)
-
+func (sim MultipleSimulationResult) PrintResult() {
+	fmt.Printf("number of launches: %d\n", sim.numberOfSimulation)
+	fmt.Printf("number of attacker winner: %d\n", sim.attackIsWinner)
+	fmt.Printf("%% of attacker winner: %v\n", 100*sim.attackIsWinner/sim.numberOfSimulation)
+	fmt.Printf("number of defenser winner: %d\n", sim.defenseIsWinner)
+	fmt.Printf("%% of defenser winner: %v\n", 100*sim.defenseIsWinner/sim.numberOfSimulation)
 }
