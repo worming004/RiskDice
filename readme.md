@@ -5,5 +5,5 @@ Open a terminal:
 * Windows + R
 * Write cmd
 * Click enter
-* Go to RiskDice.exe directory (cd command + <path>)
+* Go to RiskDice.exe directory (cd command + <i>path<i>>)
 * Execute RiskDice.exe with 2 arguments. Like this: 'RiskDice.exe 15 80'
