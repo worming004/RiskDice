@@ -15,6 +15,7 @@ func main() {
 	err, defenders, expectedPercent := GetValuesFromArgs(os.Args)
 	if err != nil {
 		fmt.Println("error while parsing arguments.\n this program will use default values")
+		fmt.Println("call '<appname> <number of defender> <expected winrate>' to use this app")
 		defenders, expectedPercent = 15, 80
 	}
 
