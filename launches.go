@@ -5,6 +5,25 @@ import (
 	"time"
 )
 
+type Launch struct {
+	attack  []int8
+	defense []int8
+}
+
+type ResultCounter struct {
+	attackCounter   int
+	defenseCounter  int
+	equalityCounter int
+}
+
+func DefaultCounter() ResultCounter {
+	val := new(ResultCounter)
+	val.attackCounter = 0
+	val.defenseCounter = 0
+	val.equalityCounter = 0
+	return *val
+}
+
 func seedRandom() {
 	rand.Seed(time.Now().UTC().Unix())
 }
@@ -29,5 +48,5 @@ func generateLaunch() Launch {
 }
 
 func getDiceValue() int8 {
-	return int8(rand.Intn(7))
+	return int8(rand.Intn(6))
 }
