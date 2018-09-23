@@ -9,12 +9,12 @@ type MultipleSimulationResult struct {
 	numberOfSimulation int
 }
 
-func Simulate(numberOfAttack, numberOfDefense int8) int {
+func Simulate(numberOfAttack, numberOfDefense int) int {
 	for numberOfAttack > 0 && numberOfDefense > 0 {
 		launch := generateLaunch(int8(min(3, int(numberOfAttack))), int8(min(2, int(numberOfDefense))))
 		result := launch.WhoIsWinning()
-		numberOfAttack = numberOfAttack - result.attackLost
-		numberOfDefense = numberOfDefense - result.defenseLost
+		numberOfAttack = numberOfAttack - int(result.attackLost)
+		numberOfDefense = numberOfDefense - int(result.defenseLost)
 	}
 	if numberOfAttack > 0 {
 		return AttackWinner
@@ -25,7 +25,7 @@ func Simulate(numberOfAttack, numberOfDefense int8) int {
 	}
 }
 
-func MultipleSimulate(numberOfAttack, numberOfDefense int8, numberOfSimulation int) MultipleSimulationResult {
+func MultipleSimulate(numberOfAttack, numberOfDefense int, numberOfSimulation int) MultipleSimulationResult {
 	result := new(MultipleSimulationResult)
 	result.numberOfSimulation = numberOfSimulation
 
