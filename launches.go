@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"sort"
 	"time"
@@ -21,17 +22,17 @@ func seedRandom() {
 	rand.Seed(time.Now().UTC().Unix())
 }
 
-func getLaunches(numberOfItem int, launchChan chan Launch, numAttackDices, numDefendeDices int) {
-	for i := 0; i < numberOfItem; i++ {
-		launchChan <- generateLaunch(3, 2)
+func GenerateLaunch(attacks, defenders int8) Launch {
+	if attacks > 3 {
+		fmt.Println("attacks > 3 for a dice battle. Are you sure you do what you wants ?")
 	}
-}
-
-func generateLaunch(attacks, defenders int8) Launch {
+	if defenders > 2 {
+		fmt.Println("defenders > 2 for a dice battle. Are you sure you do what you wants ?")
+	}
 	numberOfDice := attacks + defenders
 	token5 := make([]int8, numberOfDice)
 	for i := int8(0); i < numberOfDice; i++ {
-		token5[i] = getDiceValue()
+		token5[i] = getRandomDiceValue()
 	}
 
 	launch := new(Launch)
@@ -44,6 +45,10 @@ func generateLaunch(attacks, defenders int8) Launch {
 	return *launch
 }
 
-func getDiceValue() int8 {
+func getRandomDiceValue() int8 {
 	return int8(rand.Intn(6))
+}
+
+func (lr LaunchResult) String() string {
+	return fmt.Sprintf("attacker lost %v unit(s) and defender lost %v unit(s)", lr.attackLost, lr.defenseLost)
 }

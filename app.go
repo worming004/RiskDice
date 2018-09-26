@@ -27,6 +27,12 @@ func main() {
 		strings.ToLower("P"):
 
 		ProbabilityMode()
+		break
+	case strings.ToLower("Single"),
+		strings.ToLower("S"):
+
+		SingleMode()
+		break
 	default:
 		fmt.Println("No mode found")
 		break

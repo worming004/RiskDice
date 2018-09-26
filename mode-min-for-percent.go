@@ -15,7 +15,7 @@ func MinForPercentMode() {
 		defenders, expectedPercent = 15, 80
 	}
 
-	unitsToWin := FindMinnimumAttackToWin(defenders, expectedPercent)
+	unitsToWin, _ := FindMinimumAttackToWin(defenders, expectedPercent)
 	fmt.Printf("minimum of %v unit is necessary to beat %v with a %v winrate\n", unitsToWin, defenders, expectedPercent)
 	// result := MultipleSimulate(15, 15, DEFAULT_NUMBER_SIMULATION)
 	// result.PrintResult()
