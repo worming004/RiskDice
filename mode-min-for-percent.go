@@ -8,7 +8,7 @@ import (
 )
 
 func MinForPercentMode() {
-	err, defenders, expectedPercent := GetDefendersPercent(flag.Args())
+	err, defenders, expectedPercent := GetDefendersPercentArgs(flag.Args())
 	if err != nil {
 		fmt.Println("error while parsing arguments.\n this program will use default values")
 		fmt.Println("call '<appname> -<mode> <number of defender> <expected winrate>' to use this app")
@@ -21,7 +21,7 @@ func MinForPercentMode() {
 	// result.PrintResult()
 }
 
-func GetDefendersPercent(args []string) (error, int, float32) {
+func GetDefendersPercentArgs(args []string) (error, int, float32) {
 	if len(args) != 2 {
 		return errors.New("wrong arguments"), 0, 0
 	}

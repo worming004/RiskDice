@@ -7,7 +7,7 @@ import (
 )
 
 func ProbabilityMode() {
-	err, attackers, defenders := GetAttackersDefenders(flag.Args())
+	err, attackers, defenders := GetAttackersDefendersArgs(flag.Args())
 	if err != nil {
 		panic("Error in ProbabilityMode")
 	}
@@ -15,7 +15,7 @@ func ProbabilityMode() {
 	prop.PrintResult()
 }
 
-func GetAttackersDefenders(args []string) (error, int, int) {
+func GetAttackersDefendersArgs(args []string) (error, int, int) {
 	if len(args) != 2 {
 		return errors.New("wrong arguments"), 0, 0
 	}
