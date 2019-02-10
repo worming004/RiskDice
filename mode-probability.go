@@ -11,7 +11,7 @@ func ProbabilityMode() {
 	if err != nil {
 		panic("Error in ProbabilityMode")
 	}
-	prop := MultipleSimulate(attackers, defenders, DEFAULT_NUMBER_SIMULATION)
+	prop := MultipleSimulate(attackers, defenders, GetConfiguration().NbrOfSimulation)
 	prop.PrintResult()
 }
 
