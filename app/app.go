@@ -2,27 +2,29 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/worming004/riskdice/logic"
 )
 
 func main() {
-	SeedRandom()
+	logic.SeedRandom()
 
-	SetConfiguration()
+	logic.SetConfiguration()
 
-	configurationSglt := GetConfiguration()
+	configurationSglt := logic.GetConfiguration()
 
 	switch configurationSglt.Mode {
-	case MINFORPERCENT:
+	case logic.MINFORPERCENT:
 
-		MinForPercentMode()
+		logic.MinForPercentMode()
 		break
-	case PROBABILITY:
+	case logic.PROBABILITY:
 
-		ProbabilityMode()
+		logic.ProbabilityMode()
 		break
-	case SINGLE:
+	case logic.SINGLE:
 
-		SingleMode()
+		logic.SingleMode()
 		break
 	default:
 		fmt.Println("No mode found")
