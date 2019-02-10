@@ -6,6 +6,8 @@ import (
 	"strings"
 )
 
+const DEFAULT_NUMBER_SIMULATION int = 10000
+
 func SetConfiguration() {
 	appModePtr := flag.String("mode", "MinForPercent",
 		"Launch the app in the way to search how much attacking units is necessary to invade a territory"+

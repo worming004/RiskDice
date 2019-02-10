@@ -4,8 +4,6 @@ import (
 	"fmt"
 )
 
-const DEFAULT_NUMBER_SIMULATION int = 10000
-
 func main() {
 	SeedRandom()
 
