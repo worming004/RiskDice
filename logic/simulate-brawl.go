@@ -1,4 +1,4 @@
-package main
+package logic
 
 const ATTACKER_WINNER int = 1
 const DEFENDER_WINNER int = 2

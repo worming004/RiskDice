@@ -1,4 +1,4 @@
-package main
+package logic
 
 type byReverseVal []int8
 

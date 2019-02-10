@@ -1,4 +1,4 @@
-package main
+package logic
 
 func FindMinimumAttackToWin(numberOfDefenser int, expectedPercent float32) (int, float32) {
 	if expectedPercent < 0 || expectedPercent > 100 {

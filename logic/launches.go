@@ -1,4 +1,4 @@
-package main
+package logic
 
 import (
 	"fmt"
@@ -18,7 +18,7 @@ type LaunchResult struct {
 	defenseLost int8
 }
 
-func seedRandom() {
+func SeedRandom() {
 	rand.Seed(time.Now().UTC().Unix())
 }
 

@@ -7,7 +7,7 @@ import (
 const DEFAULT_NUMBER_SIMULATION int = 10000
 
 func main() {
-	seedRandom()
+	SeedRandom()
 
 	SetConfiguration()
 
